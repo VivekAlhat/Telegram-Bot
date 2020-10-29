@@ -15,7 +15,7 @@ bot.start((ctx) =>
 /* help command */
 bot.help((ctx) =>
   ctx.reply(
-    "/start - Initialize Bot\n/help - Get Help\n/code - Github Repository Of Bot\n/bored - Get Random Activity To Do\n/bitcoin - Get Current Bitcoin Rate"
+    "/start - Initialize Bot\n/help - Get Help\n/code - Github Repository Of Bot\n/bored - Get Random Activity To Do\n/bitcoin - Get Current Bitcoin Rate\n/fact - Get Random Fact"
   )
 );
 
@@ -34,6 +34,12 @@ bot.command("bored", (ctx) => {
 bot.command("bitcoin", (ctx) => {
   const price = commands.getBitcoinPrice();
   price.then((e) => ctx.reply("Bitcoin Rate: " + e.bpi.INR.rate_float));
+});
+
+/* get random fact */
+bot.command("fact", (ctx) => {
+  const fact = commands.getRandomFact();
+  fact.then((e) => ctx.reply(e.text)).catch((err) => console.log(err));
 });
 
 /* launch bot */
