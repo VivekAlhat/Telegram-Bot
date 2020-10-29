@@ -12,6 +12,14 @@ class Features {
     const data = await response.data;
     return data;
   };
+
+  getBitcoinPrice = async () => {
+    const response = await Axios.get(
+      "https://api.coindesk.com/v1/bpi/currentprice/INR.json"
+    );
+    const data = await response.data;
+    return data;
+  };
 }
 
 module.exports = new Features();
