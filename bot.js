@@ -8,14 +8,14 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 /* start command */
 bot.start((ctx) =>
   ctx.reply(
-    "Hello! I am Acaztron the bot. Nice to meet you!\nUse /help command to know things that I can do for you"
+    "Hello! I am Acaztron the bot. Nice to meet you!\n\nUse /help command to know things that I can do for you"
   )
 );
 
 /* help command */
 bot.help((ctx) =>
   ctx.reply(
-    "/start - Initialize Bot\n/help - Get Help\n/code - Github Repository Of Bot\n/bored - Get Random Activity To Do\n/bitcoin - Get Current Bitcoin Rate\n/fact - Get Random Fact"
+    "/start\v\vInitialize Bot\n/help\v\vGet Help\n/code\v\vGithub Repository Of Bot\n/bored\v\vGet Random Activity To Do\n/bitcoin\v\vGet Current Bitcoin Rate\n/fact\v\vGet Random Fact\n/usd\v\vGet USD To INR Rate"
   )
 );
 
@@ -33,13 +33,21 @@ bot.command("bored", (ctx) => {
 /* get bitcoin price */
 bot.command("bitcoin", (ctx) => {
   const price = commands.getBitcoinPrice();
-  price.then((e) => ctx.reply("Bitcoin Rate: " + e.bpi.INR.rate_float));
+  price.then((e) =>
+    ctx.reply("Bitcoin Rate: " + e.bpi.INR.rate_float.toFixed(2))
+  );
 });
 
 /* get random fact */
 bot.command("fact", (ctx) => {
   const fact = commands.getRandomFact();
   fact.then((e) => ctx.reply(e.text)).catch((err) => console.log(err));
+});
+
+/* get USD rate */
+bot.command("usd", (ctx) => {
+  const usd = commands.getUSDRate();
+  usd.then((e) => ctx.reply("1 USD : " + e.rates.INR.toFixed(2) + " rupees"));
 });
 
 /* launch bot */

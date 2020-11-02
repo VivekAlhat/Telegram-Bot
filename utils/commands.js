@@ -29,6 +29,15 @@ class Features {
     const data = await response.data;
     return data;
   };
+
+  getUSDRate = async () => {
+    const response = await Axios.get(
+      "https://api.exchangeratesapi.io/latest?base=USD"
+    );
+
+    const data = await response.data;
+    return data;
+  };
 }
 
 module.exports = new Features();
