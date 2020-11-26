@@ -1,9 +1,18 @@
 require("dotenv").config();
 const _ = require("lodash");
+const http = require("http");
 const { default: Telegraf } = require("telegraf");
 const commands = require("./utils/commands");
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
+const port = process.env.PORT || 3000;
+
+http
+  .createServer((req, res) => {
+    res.write("Bot started. Please check Telegram");
+    res.end();
+  })
+  .listen(port);
 
 /* start command */
 bot.start((ctx) =>
